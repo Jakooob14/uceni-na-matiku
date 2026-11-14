@@ -10,33 +10,89 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as StatistikyRouteImport } from './routes/statistiky'
+import { Route as ElementarniFunkceIndexRouteImport } from './routes/elementarni-funkce/index'
+import { Route as ElementarniFunkceAtlasRouteImport } from './routes/elementarni-funkce/atlas'
+import { Route as PripravujemeModuleIdRouteImport } from './routes/pripravujeme.$moduleId'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const StatistikyRoute = StatistikyRouteImport.update({
+  id: '/statistiky',
+  path: '/statistiky',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ElementarniFunkceIndexRoute = ElementarniFunkceIndexRouteImport.update({
+  id: '/elementarni-funkce/',
+  path: '/elementarni-funkce/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ElementarniFunkceAtlasRoute = ElementarniFunkceAtlasRouteImport.update({
+  id: '/elementarni-funkce/atlas',
+  path: '/elementarni-funkce/atlas',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PripravujemeModuleIdRoute = PripravujemeModuleIdRouteImport.update({
+  id: '/pripravujeme/$moduleId',
+  path: '/pripravujeme/$moduleId',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/statistiky': typeof StatistikyRoute
+  '/elementarni-funkce/atlas': typeof ElementarniFunkceAtlasRoute
+  '/pripravujeme/$moduleId': typeof PripravujemeModuleIdRoute
+  '/elementarni-funkce/': typeof ElementarniFunkceIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/statistiky': typeof StatistikyRoute
+  '/elementarni-funkce/atlas': typeof ElementarniFunkceAtlasRoute
+  '/pripravujeme/$moduleId': typeof PripravujemeModuleIdRoute
+  '/elementarni-funkce': typeof ElementarniFunkceIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/statistiky': typeof StatistikyRoute
+  '/elementarni-funkce/atlas': typeof ElementarniFunkceAtlasRoute
+  '/pripravujeme/$moduleId': typeof PripravujemeModuleIdRoute
+  '/elementarni-funkce/': typeof ElementarniFunkceIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/statistiky'
+    | '/elementarni-funkce/atlas'
+    | '/pripravujeme/$moduleId'
+    | '/elementarni-funkce/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/statistiky'
+    | '/elementarni-funkce/atlas'
+    | '/pripravujeme/$moduleId'
+    | '/elementarni-funkce'
+  id:
+    | '__root__'
+    | '/'
+    | '/statistiky'
+    | '/elementarni-funkce/atlas'
+    | '/pripravujeme/$moduleId'
+    | '/elementarni-funkce/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  StatistikyRoute: typeof StatistikyRoute
+  ElementarniFunkceAtlasRoute: typeof ElementarniFunkceAtlasRoute
+  PripravujemeModuleIdRoute: typeof PripravujemeModuleIdRoute
+  ElementarniFunkceIndexRoute: typeof ElementarniFunkceIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +104,43 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/statistiky': {
+      id: '/statistiky'
+      path: '/statistiky'
+      fullPath: '/statistiky'
+      preLoaderRoute: typeof StatistikyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/elementarni-funkce/': {
+      id: '/elementarni-funkce/'
+      path: '/elementarni-funkce'
+      fullPath: '/elementarni-funkce/'
+      preLoaderRoute: typeof ElementarniFunkceIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/elementarni-funkce/atlas': {
+      id: '/elementarni-funkce/atlas'
+      path: '/elementarni-funkce/atlas'
+      fullPath: '/elementarni-funkce/atlas'
+      preLoaderRoute: typeof ElementarniFunkceAtlasRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/pripravujeme/$moduleId': {
+      id: '/pripravujeme/$moduleId'
+      path: '/pripravujeme/$moduleId'
+      fullPath: '/pripravujeme/$moduleId'
+      preLoaderRoute: typeof PripravujemeModuleIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  StatistikyRoute: StatistikyRoute,
+  ElementarniFunkceAtlasRoute: ElementarniFunkceAtlasRoute,
+  PripravujemeModuleIdRoute: PripravujemeModuleIdRoute,
+  ElementarniFunkceIndexRoute: ElementarniFunkceIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
